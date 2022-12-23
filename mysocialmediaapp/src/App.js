@@ -14,27 +14,26 @@ function App() {
     // declare the async data fetching function
     const fetchData = async () => {
       // get the data from the api
-      const data = await fetch('http://localhost:9000/testAPI');
-      // convert the data to json
-      const json = await data.json();
+      const data = await fetch('/testAPI').then((response) => response.json());
+      // print the data once retrieved
+      // console.log(data);
       // set state with the result
-      setPosts(json);
+      setPosts(data);
     }
 
     // call the function
     fetchData()
       // make sure to catch any error
-      .catch(console.error);;
+      .catch((err)=>{
+        console.log("Error retrieving data");
+        console.error;
+      });
   }, [])
 
-  // Object.keys(posts).map(key =>(
-  //   console.log(posts[key])
-    // <Post key={key} postData={posts[key]}/>
-// ))
   return (
     <div className="App">
       <nav className='navbar sticky-top navbar-expand-lg navbar-light bg-light'>
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href="/">
           <img src="/logo.png" alt="" width="30" height="24" className="d-inline-block align-text-top" />
           Thinking Out Loud
         </a>

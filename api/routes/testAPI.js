@@ -1,37 +1,49 @@
 const { json } = require("express");
 var express = require("express");
 var router = express.Router();
-const { MongoClient } = require("mongodb");
-const uri =
-"mongodb://localhost:27017/thinkingOutLoud/thoughts";
+var fs = require("fs");
 
-// var posts = {
-//     1: { id: 1, postContent: "lorem ipsum", postedBy: "abc" },
-//     2: { id: 2, postContent: "lorem ipsum", postedBy: "abc" },
-//     3: { id: 3, postContent: "lorem ipsum", postedBy: "def" },
-//     4: { id: 4, postContent: "lorem ipsum", postedBy: "ghi" },
-//     6: { id: 6, postContent: "lorem ipsum", postedBy: "abc" },
-//     7: { id: 7, postContent: "lorem ipsum", postedBy: "abc" },
-//     8: { id: 8, postContent: "lorem ipsum", postedBy: "abc" },
-//     9: { id: 9, postContent: "lorem ipsum", postedBy: "abc" },
-// };
+
+// const { MongoClient } = require("mongodb");
+// const uri =
+// "mongodb://localhost:27017/thinkingOutLoud/thoughts";
 
 var posts;
 
-
+// router.get("/", function (req, res, next) {
+//     MongoClient.connect(uri, function(err, db) {
+//         if (err) throw err;
+//         var dbo = db.db("thinkingOutLoud");
+//         dbo.collection("thoughts").find({}).toArray(function(err, result) {
+//           if (err) throw err;
+//         //   console.log(result);
+//           posts=result;
+//           db.close();
+//         });
+//       });
+//     res.send(JSON.stringify(posts));
+// });
 
 router.get("/", function (req, res, next) {
-    MongoClient.connect(uri, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("thinkingOutLoud");
-        dbo.collection("thoughts").find({}).toArray(function(err, result) {
-          if (err) throw err;
-        //   console.log(result);
-          posts=result;
-          db.close();
-        });
-      });
-    res.send(JSON.stringify(posts));
-});
+  async function readDataFromFile(){
+    const data =  await fs.readFileSync("temp.json");
+    // return data.toString();
+    return JSON.parse(data.toString());
+
+  }
+  readDataFromFile()
+    // .then((data)=>console.log((JSON.parse(data))))
+    .then((data)=> {
+        res.send(data)
+    })
+    .catch((err)=>console.log(err));
+})
+
+// How to write to a file
+// 
+// fs.writeFile("temp.txt", data, (err) => {
+//   if (err) console.log(err);
+//   console.log("Successfully Written to File.");
+// });
 
 module.exports = router;

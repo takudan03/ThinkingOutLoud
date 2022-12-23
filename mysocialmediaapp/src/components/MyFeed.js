@@ -2,21 +2,20 @@ import Post from "./Post";
 import NewThought from "./NewThought";
 
 export default function MyFeed(props) {
+    var thoughts=props['posts']['thoughts'];
+    console.log(thoughts);
 
-    console.log(props.posts)
     return (
         <div className="container">
             <NewThought/>
             <hr></hr>
             <ul>
-                    {
-                    Object.keys(props.posts).map(key =>(
+                {/* {
+                    thoughts.map((key) =>{
                         <Post key={key} postData={props.posts[key]}/>
-                    ))
-                }
+                    })
+                } */}
             </ul>
         </div>
     );
-
-
 }

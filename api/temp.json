@@ -1,0 +1,12 @@
+{
+    "thoughts":[
+        { "_id": 1, "postContent": "lorem ipsum", "postedBy": "abc" },
+        { "_id": 2, "postContent": "lorem ipsum", "postedBy": "abc" },
+        { "_id": 3, "postContent": "lorem ipsum", "postedBy": "def" },
+        { "_id": 4, "postContent": "lorem ipsum", "postedBy": "ghi" },
+        { "_id": 6, "postContent": "lorem ipsum", "postedBy": "abc" },
+        { "_id": 7, "postContent": "lorem ipsum", "postedBy": "abc" },
+        { "_id": 8, "postContent": "lorem ipsum", "postedBy": "abc" },
+        { "_id": 9, "postContent": "lorem ipsum", "postedBy": "abc" }
+    ]
+}
