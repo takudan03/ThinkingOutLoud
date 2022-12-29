@@ -14,6 +14,7 @@ function App() {
     // declare the async data fetching function
     const fetchData = async () => {
       // get the data from the api
+      // const data = await fetch('/testAPI').then((response) => response.json());
       const data = await fetch('/testAPI').then((response) => response.json());
       // print the data once retrieved
       // console.log(data);

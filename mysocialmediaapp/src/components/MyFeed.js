@@ -1,20 +1,17 @@
 import Post from "./Post";
 import NewThought from "./NewThought";
 
-export default function MyFeed(props) {
-    var thoughts=props['posts']['thoughts'];
-    console.log(thoughts);
-
+export default function MyFeed(props) {    
     return (
         <div className="container">
             <NewThought/>
             <hr></hr>
             <ul>
-                {/* {
-                    thoughts.map((key) =>{
-                        <Post key={key} postData={props.posts[key]}/>
-                    })
-                } */}
+                {
+                    Array.from(props.posts).map((post) =>               
+                        <Post key={post['_id']} postData={post}/>
+                    )
+                }
             </ul>
         </div>
     );
