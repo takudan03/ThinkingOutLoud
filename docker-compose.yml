@@ -1,0 +1,28 @@
+services:
+  mongo:
+    image: mongo
+    restart: always
+    container_name: myMongoInstance
+    ports: 
+      - 27017:27017
+
+
+  backend:
+    image: takudan03/tolbackend
+    depends_on:
+      - mongo
+    ports:
+      - 9000:9000
+    environment:
+      - DEBUG=True
+    build: .
+  
+  frontend:
+    image: takudan03/tolfrontend
+    depends_on:
+      - backend
+    ports:
+      - 3000:3000
+    environment:
+      - DEBUG=True
+    build: .

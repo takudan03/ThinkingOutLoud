@@ -31,31 +31,8 @@ app.use("/testAPI", testAPIRouter);
 app.use("/explore", exploreRouter)
 
 const uri =
-  "mongodb://localhost:27017/";
+  "mongodb://myMongoInstance:27017/";
 
-// var thoughts = [
-//     { _id: 1, postContent: "lorem ipsum", postedBy: "abc" },
-//     { _id: 2, postContent: "lorem ipsum", postedBy: "abc" },
-//     { _id: 3, postContent: "lorem ipsum", postedBy: "def" },
-//     { _id: 4, postContent: "lorem ipsum", postedBy: "ghi" },
-//     { _id: 6, postContent: "lorem ipsum", postedBy: "abc" },
-//     { _id: 7, postContent: "lorem ipsum", postedBy: "abc" },
-//     { _id: 8, postContent: "lorem ipsum", postedBy: "abc" },
-//     { _id: 9, postContent: "lorem ipsum", postedBy: "abc" }
-// ];
-
-// How to insert into DB
-// MongoClient.connect(uri, function(err, db) {
-  
-//     if (err) throw err;
-//     var dbo = db.db("thinkingOutLoud");
-//     console.log("Database connected!");
-//     dbo.collection("thoughts").insertMany(thoughts, function(err, res) {
-//       if (err) throw err;
-//       console.log("documents inserted");
-//       db.close();
-//     });
-//   });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

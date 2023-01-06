@@ -5,45 +5,69 @@ var fs = require("fs");
 
 
 const { MongoClient } = require("mongodb");
-const uri =
-"mongodb://localhost:27017/thinkingOutLoud/thoughts";
+// const uri =
+// "mongodb://myMongoInstance:27017/thinkingOutLoud/thoughts";
 
 var posts;
 
 router.get("/", function (req, res, next) {
-    MongoClient.connect(uri, function(err, db) {
+  try {
+    MongoClient.connect(uri, function (err, db) {
+      if (err) throw err;
+      var dbo = db.db("thinkingOutLoud");
+      dbo.collection("thoughts").find({}).toArray(function (err, result) {
         if (err) throw err;
-        var dbo = db.db("thinkingOutLoud");
-        dbo.collection("thoughts").find({}).toArray(function(err, result) {
-          if (err) throw err;
-        //   console.log(result);
-          posts=result;
-          db.close();
-        });
+        posts = result;
+        db.close();
       });
-    res.send(JSON.stringify(posts));
+      res.send(JSON.stringify(posts));
+    });
+  } catch {
+    res.send('Error Connecting to MONGODB');
+  }
 });
 
-// router.get("/", function (req, res, next) {
-//   async function readDataFromFile(){
-//     const data =  await fs.readFileSync("temp.json");
-//     // return data.toString();
-//     return JSON.parse(data.toString());
+router.post("/newThought", (req, res) => {
+  try {
+    console.log('New Thought submitted');
+    console.log(req.body);
+    MongoClient.connect(uri, function (err, db) {
+      if (err) throw err;
+      var dbo = db.db("thinkingOutLoud");
+      const result = dbo.collection("thoughts").insertOne(req.body);
+    });
+    res.send(JSON.stringify(posts));
+  } catch {
+    res.send('Error Connecting to MONGODB');
+  }
+})
 
-//   }
-//   readDataFromFile()
-//     // .then((data)=>console.log((JSON.parse(data))))
-//     .then((data)=> {
-//         res.send(data)
-//     })
-//     .catch((err)=>console.log(err));
-// })
+router.get("/initDB", (req, res) => {
+  try {
 
-// How to write to a file
-// 
-// fs.writeFile("temp.txt", data, (err) => {
-//   if (err) console.log(err);
-//   console.log("Successfully Written to File.");
-// });
+    var thoughts = [
+      { _id: 1, postContent: "lorem ipsum", postedBy: "abc" },
+      { _id: 2, postContent: "lorem ipsum", postedBy: "abc" },
+      { _id: 3, postContent: "lorem ipsum", postedBy: "def" },
+      { _id: 4, postContent: "lorem ipsum", postedBy: "ghi" },
+      { _id: 6, postContent: "lorem ipsum", postedBy: "abc" },
+      { _id: 7, postContent: "lorem ipsum", postedBy: "abc" },
+      { _id: 8, postContent: "lorem ipsum", postedBy: "abc" },
+      { _id: 9, postContent: "lorem ipsum", postedBy: "abc" }
+    ];
+    MongoClient.connect(uri, function (err, db) {
+      if (err) throw err;
+      var dbo = db.db("thinkingOutLoud");
+      dbo.collection("thoughts").insertMany(thoughts, function(err, res) {
+              if (err) throw err;
+              console.log("documents inserted");
+              db.close();
+            });
+    });
+    res.send("DB Initialised");
+  } catch {
+    res.send('Error Connecting to MONGODB');
+  }
+})
 
 module.exports = router;
