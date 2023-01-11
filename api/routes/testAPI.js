@@ -5,8 +5,8 @@ var fs = require("fs");
 
 
 const { MongoClient } = require("mongodb");
-// const uri =
-// "mongodb://myMongoInstance:27017/thinkingOutLoud/thoughts";
+const uri =
+"mongodb://myMongoInstance:27019/thinkingOutLoud/thoughts";
 
 var posts;
 

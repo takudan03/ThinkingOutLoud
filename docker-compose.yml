@@ -4,11 +4,12 @@ services:
     restart: always
     container_name: myMongoInstance
     ports: 
-      - 27017:27017
-
+      - 27019:27017
+    volumes:
+      - mongo-data:/data/db
 
   backend:
-    image: takudan03/tolbackend
+    image: takudan03/tol-backend
     depends_on:
       - mongo
     ports:
@@ -18,7 +19,7 @@ services:
     build: .
   
   frontend:
-    image: takudan03/tolfrontend
+    image: takudan03/tol-frontend
     depends_on:
       - backend
     ports:
@@ -26,3 +27,7 @@ services:
     environment:
       - DEBUG=True
     build: .
+
+volumes:
+  mongo-data:
+    driver: local

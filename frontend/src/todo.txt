@@ -1,0 +1,21 @@
+make db in mognodb
+
+thoughts{
+    thoughid{
+        content:
+        likeCount:
+        likers:[]
+        dateposted:
+    }
+}
+users{
+    userid{
+        name:
+        datejoined:
+        likes:[thoughtIDs]
+        likeCount:number of liked thoughts
+        thoughts:[thoughtIDs]
+        followers:[userid]
+        following: [userIDs]
+    }
+}

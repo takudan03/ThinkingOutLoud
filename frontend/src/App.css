@@ -1,0 +1,20 @@
+
+.card{
+  margin:10px;
+  box-shadow: -2px 2px gray;
+}
+
+ul{
+  padding: 0;
+}
+
+/* New thought stlying */
+/* $border: #ced4da; */
+
+.newThoughtInput{
+  border-style: none; 
+  border-color: Transparent; 
+  overflow: auto;
+  resize: none;
+  outline: none;
+}
